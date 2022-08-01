@@ -1,5 +1,47 @@
 .Weather {
-	color: green;
-	border: 1px solid grey;
-	/*max-width: 600px;*/
+	padding: 16px;
+}
+
+.Weather h1 {
+	color: #202124;
+	font-size: 24px;
+	line-height: 26px;
+	margin: 0;
+}
+
+.Weather form {
+	margin-bottom: 20px;
+}
+
+.Weather ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.Weather .current-conditions li {
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.Weather .location li {
+	text-align: right;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.Weather .temperature {
+	font-size: 48px;
+	line-height: 60px;
+	color: #202124;
+	margin-left: -3px;
+}
+
+.Weather .current-temperature {
+	padding: 0;
+}
+
+.Weather .units {
+	position: relative;
+	bottom: 22px;
 }
