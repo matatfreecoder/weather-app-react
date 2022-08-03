@@ -1,59 +1,97 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import "./Weather.css";
 
-export default function Weather() {
-	return (
-		<div className="Weather border rounded">
-			<form>
+export default function Weather(props) {
+	const [ready, setReady] = useState(false);
+	const [weatherData, setweatherData] = useState({});
+
+	function displayWeather(response) {
+		console.log(response.data);
+		setweatherData({
+			temperature: response.data.main.temp,
+			city: response.data.name,
+			country: response.data.sys.country,
+			wind: response.data.wind.speed,
+			humidity: response.data.main.humidity,
+			feells: response.data.main.feels_like,
+			description: response.data.weather[0].description,
+			iconUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+			date: "coming soon",
+		});
+
+		setReady(true);
+	}
+
+	if (ready) {
+		return (
+			<div className="Weather border rounded">
+				<form>
+					<div className="row">
+						<div className="col-8">
+							<input
+								type="search"
+								placeholder="Enter a city"
+								className="form-control"
+								autoFocus="on"
+							/>
+						</div>
+						<div className="col-3">
+							<input
+								type="submit"
+								value="Search"
+								className="btn btn-primary w-100"
+							/>
+						</div>
+					</div>
+				</form>
+
 				<div className="row">
-					<div className="col-8">
-						<input
-							type="search"
-							placeholder="Enter a city"
-							className="form-control"
-							autoFocus="on"
-						/>
+					<div className="col-2">
+						<img src={weatherData.iconUrl} alt={weatherData.description} />
 					</div>
-					<div className="col-3">
-						<input
-							type="submit"
-							value="Search"
-							className="btn btn-primary w-100"
-						/>
+					<div className="col-2 current-temperature">
+						<span className="temperature">
+							{Math.round(weatherData.temperature)}
+						</span>
+						<span className="units">°C|°F</span>
 					</div>
-				</div>
-			</form>
+					<div className="col-3 current-conditions">
+						<ul>
+							<li>Вологість: {weatherData.humidity}%</li>
+							<li>Вітер: {Math.round(weatherData.wind)} km/h</li>
+							<li>Feels like: {Math.round(weatherData.feells)}°C</li>
+						</ul>
+					</div>
+					<div className="col-5 location">
+						<ul>
+							<li>
+								<h1>
+									{weatherData.city}, {weatherData.country}
+								</h1>
+							</li>
 
-			<div className="row">
-				<div className="col-2">
-					<img
-						src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
-						alt="Weather icon"
-					/>
-				</div>
-				<div className="col-2 current-temperature">
-					<span className="temperature">21</span>
-					<span className="units">°C|°F</span>
-				</div>
-				<div className="col-3 current-conditions">
-					<ul>
-						<li>Опади: 17%</li>
-						<li>Вологість: 92%</li>
-						<li>Вітер: 11 км/год</li>
-						<li>Feel like 21°C</li>
-					</ul>
-				</div>
-				<div className="col-5 location">
-					<ul>
-						<li>
-							<h1>Нью-Йорк, США</h1>
-						</li>
-
-						<li>понеділок 06:00</li>
-						<li>Хмарно</li>
-					</ul>
+							<li> {weatherData.date}</li>
+							<li className="text-capitalize">{weatherData.description}</li>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	} else {
+		const apiKey = "15b17c39bc6708ab7518942a1ffb9aca";
+		let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
+		axios.get(apiUrl).then(displayWeather);
+
+		return (
+			<RotatingLines
+				strokeColor="grey"
+				strokeWidth="5"
+				animationDuration="0.75"
+				width="96"
+				visible={true}
+			/>
+		);
+	}
 }
