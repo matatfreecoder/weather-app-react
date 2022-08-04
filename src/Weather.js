@@ -1,15 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
+import ShowDate from "./ShowDate";
 import "./Weather.css";
 
 export default function Weather(props) {
-	const [ready, setReady] = useState(false);
-	const [weatherData, setweatherData] = useState({});
+	const [weatherData, setweatherData] = useState({ ready: false });
 
 	function displayWeather(response) {
 		console.log(response.data);
 		setweatherData({
+			ready: true,
 			temperature: response.data.main.temp,
 			city: response.data.name,
 			country: response.data.sys.country,
@@ -18,13 +19,11 @@ export default function Weather(props) {
 			feells: response.data.main.feels_like,
 			description: response.data.weather[0].description,
 			iconUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-			date: "coming soon",
+			date: new Date(response.data.dt * 1000),
 		});
-
-		setReady(true);
 	}
 
-	if (ready) {
+	if (weatherData.ready) {
 		return (
 			<div className="Weather border rounded">
 				<form>
@@ -72,7 +71,10 @@ export default function Weather(props) {
 								</h1>
 							</li>
 
-							<li> {weatherData.date}</li>
+							<li>
+								{" "}
+								<ShowDate date={weatherData.date} />{" "}
+							</li>
 							<li className="text-capitalize">{weatherData.description}</li>
 						</ul>
 					</div>
