@@ -34,7 +34,7 @@
 	font-size: 48px;
 	line-height: 60px;
 	color: #202124;
-	margin-left: -3px;
+	margin-left: -10px;
 }
 
 .Weather .current-temperature {
@@ -48,6 +48,10 @@
 
 .Weather img {
 	position: relative;
-	bottom: 25px;
-	right: 15px;
+	bottom: 5px;
+	max-width: 100%;
+}
+
+.Weather a {
+	text-decoration: none;
 }

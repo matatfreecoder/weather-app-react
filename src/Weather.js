@@ -70,7 +70,7 @@ export default function Weather(props) {
 
 		return (
 			<RotatingLines
-				strokeColor="grey"
+				strokeColor="green"
 				strokeWidth="5"
 				animationDuration="0.75"
 				width="96"
