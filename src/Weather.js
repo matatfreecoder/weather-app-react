@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
 import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -12,6 +13,7 @@ export default function Weather(props) {
 		console.log(response.data);
 		setweatherData({
 			ready: true,
+			coordinates: response.data.coord,
 			temperature: response.data.main.temp,
 			city: response.data.name,
 			country: response.data.sys.country,
@@ -63,6 +65,7 @@ export default function Weather(props) {
 					</div>
 				</form>
 				<WeatherInfo data={weatherData} />
+				<WeatherForecast coordinates={weatherData.coordinates} />
 			</div>
 		);
 	} else {

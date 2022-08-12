@@ -55,3 +55,7 @@
 .Weather a {
 	text-decoration: none;
 }
+
+.WeatherInfo {
+	margin-bottom: 20px;
+}
