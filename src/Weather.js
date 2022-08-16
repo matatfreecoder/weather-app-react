@@ -10,7 +10,7 @@ export default function Weather(props) {
 	const [city, setCity] = useState(props.defaultCity);
 
 	function displayWeather(response) {
-		console.log(response.data);
+		//	console.log(response.data);
 		setweatherData({
 			ready: true,
 			coordinates: response.data.coord,
@@ -59,7 +59,7 @@ export default function Weather(props) {
 							<input
 								type="submit"
 								value="Search"
-								className="btn btn-primary w-100"
+								className="btn btn-outline-secondary"
 							/>
 						</div>
 					</div>

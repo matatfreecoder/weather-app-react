@@ -13,10 +13,21 @@
 	margin-bottom: 25px;
 }
 
+.Weather form .row {
+	justify-content: space-around;
+}
 .Weather ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+}
+
+.Weather input {
+	width: 100%;
+}
+
+.Weather .btn-outline-secondary {
+	border: 1px solid #ced4da;
 }
 
 .Weather .current-conditions li {
@@ -42,6 +53,7 @@
 }
 
 .Weather .units {
+	font-size: 14px;
 	position: relative;
 	bottom: 22px;
 }
@@ -58,4 +70,27 @@
 
 .WeatherInfo {
 	margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+	.Weather {
+		padding: 6px;
+		font-size: 12px;
+	}
+
+	.Weather .temperature {
+		font-size: 28px;
+	}
+
+	.Weather h1 {
+		font-size: 24px;
+	}
+
+	.Weather .units {
+		font-size: 12px;
+	}
+
+	.Weather .location li {
+		font-size: 12px;
+	}
 }
